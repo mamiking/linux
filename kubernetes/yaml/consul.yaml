@@ -1,0 +1,35 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  labels:
+    app: consul-client
+  name: consul-client-ds
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: consul-client
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: consul-client
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+      containers:
+      - name: consul-client
+        image: consul:1.2.4
+        command: ["/usr/local/bin/docker-entrypoint.sh","agent","-advertise","$(MY_HOST_IP)","-client","$(MY_HOST_IP)"]
+        #command: ["consul","agent","-bind","$(MY_HOST_IP)"]
+        env:
+        - name: CONSUL_LOCAL_CONFIG
+          value: '{"datacenter":"uat","acl_datacenter":"uat","leave_on_terminate":true,"acl_agent_token":"84e4cb16-8816-488e-af9d-38476ee9e3bf","server":false,"retry_join":["10.9.40.60"]}'
+        - name: MY_HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+      imagePullSecrets:
+      - name: regcred

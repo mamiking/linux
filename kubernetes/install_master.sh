@@ -2,6 +2,7 @@
 
 ## bash for  centos 7
 ## create by whc  at 20190412
+## 安装k8-master
 
 ## 查看 selinux 状态
 sestatus
@@ -119,6 +120,8 @@ kubectl get nodes
 ## 配置集群网络  flannel.yaml : Network
 # 这个配置内容比较长，只需要明确 Network 的IP段跟 k8sconfig.yaml 中的 podSubnet  保持一致即可
 kubectl apply -f flannel.yaml
+
+# 需要注意的是，节点ip和容器之间的IP不是同网段，所以
 
 
 ## 后续工作

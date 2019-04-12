@@ -1,4 +1,5 @@
-#  3 安装consul 详情见 consul.sh
+## 安装 consul
+
 mkdir setup
 cd setup
 wget https://releases.hashicorp.com/consul/1.2.4/consul_1.2.4_linux_amd64.zip
@@ -62,6 +63,51 @@ systemctl daemon-reload
 systemctl enable consul
 systemctl start consul
 
+##  打开consul进行配置，使用master-token:5bc181ad-e172-433b-b027-4b8aeab9e527
+# http://10.9.40.60:8500
+
+# 创建agent-token 并授权 ，client 类型 token ID: 84e4cb16-8816-488e-af9d-38476ee9e3bf
+node "" {
+  policy = "write"
+}
+service "" {
+  policy = "read"
+}
+key "_rexec" {
+  policy = "write"
+}
+
+
+# 创建 client-token 并授权  用uuidgen获得token ID： 5373fde2-a511-4152-91cd-0e19ed9700ee 
+
+agent "" {
+	policy = "read" 
+}
+node "" { 
+	policy = "read" 
+} 
+service "" { 
+	policy = "write" 
+}
+key "" { 
+	policy = "write" 
+}
+event "" { 
+	policy = "write" 
+}
+query "" {
+	policy = "write" 
+}
+session "" {
+	policy = "write" 
+}
+
+
+
+
+
+
 
 
 ####  consul 的备份
+## 在 crontab -e 中加入 consul_crontab_backup.sh

@@ -2,7 +2,7 @@
 
 ## bash for  centos 7
 ## create by whc  at 20190412
-
+## 安装k8-node001
 ## 查看 selinux 状态
 sestatus
 

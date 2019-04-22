@@ -1,15 +1,29 @@
 #!/bin/bash
 ## kubectl 常用命令集合
 
+####################get######################
+
+## 获得所有namespace
+kubectl get ns
+
+## 在指定的namespace下获取资源：
+kubectl  -n {}
+
 ## 获取所有节点
 kubectl get nodes
 
-## 获取所有容易
+## 获取所有容器
 kubectl get pods
 
 ## 查看某个容器的详细信息
 # 容器列表
 kubectl get deployments
+
+
+
+
+
+
 # 容器信息
 kubectl describe deployments ctl-exam
 kubectl describe  pods ctl-exam-769785594-7p7sm

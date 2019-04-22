@@ -10,7 +10,9 @@ sestatus
 sed -i "s/=enforcing/=disabled/g" /etc/selinux/config
 
 
-
+## 设定文件打开最大句柄数
+echo "* soft nofile 65535">>/etc/security/limits.conf
+echo "* hard nofile 65535">>/etc/security/limits.conf
 
 ## 配置安装源，软件包(epel)  以及更新
 mv  /etc/yum.repos.d/CentOS-Base.repo  /etc/yum.repos.d/CentOS-Base.repo.backup
@@ -37,10 +39,10 @@ yum install git zip unzip wget curl vim telnet ntp -y
 ## 设定时间，并同步网络
 ## timezone
 
-# timedatectl set-timezone Asia/Shanghai
-# yum install -y ntp
-# systemctl enable ntpd
-# systemctl start ntpd
-# ntpdate -u cn.pool.ntp.org
+ timedatectl set-timezone Asia/Shanghai
+ yum install -y ntp
+ systemctl enable ntpd
+ systemctl start ntpd
+ ntpdate -u cn.pool.ntp.org
 
 

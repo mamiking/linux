@@ -17,7 +17,7 @@ yum update -y
 yum install git zip unzip wget curl vim telnet ntp -y
 
 
-## 修改主机名
+## 修改主机名,名称不能跟master相同
 hostnamectl set-hostname k8-slave-node001
 
 
@@ -79,8 +79,9 @@ systemctl restart kubelet
 
 ## 注意 下面这个命令是通过 master的初始化得到的，一定要记住
 ## 如果忘记了，需要在master上 执行  kubeadm token create --print-join-command 重新生成并获取
-
-kubeadm join 10.9.40.60:6443 --token 8s7ofe.c8p7sj3jv2u43w76 --discovery-token-ca-cert-hash sha256:8d96611839648a79877f62e8316dd78b6cc274b77ea1435f731b33964a5bc21e
+## 确保master的防火墙已经关闭   至少开放6443端口
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+kubeadm join 10.9.40.60:6443 --token 8s7ofe.c8p7sj3jv2u43w76 --discovery-token-ca-cert-hash sha256:8d96611839648a79877f62e8316dd78b6cc274b77ea1435f731b33964a5bc21e --ignore-preflight-errors="Swap"
 
 
 

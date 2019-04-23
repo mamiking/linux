@@ -22,6 +22,10 @@ yum install git zip unzip wget curl vim telnet ntp -y
 hostnamectl set-hostname k8-master-dev
 
 
+## 关闭防火墙，否则节点可能加入不进来
+systemctl disable firewalld
+systemctl stop firewalld
+
 ## reboot 使得环境生效
 reboot
 

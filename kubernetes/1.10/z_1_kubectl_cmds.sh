@@ -54,3 +54,16 @@ kubectl cp ctl-battle-5896857d65-p6crk:/program/app.jar ./app.jar
 ## 查看容器服务日志
 kubectl logs -f  ctl-exam-769785594-7p7sm
 kubectl logs -f --tail=100  ctl-exam-769785594-7p7sm
+
+
+## s删除pod后重启
+kubectl delete pod ctl-user-77c4d96c4f-fqr47
+
+##  如果始终处于 Terminating，需要强制
+kubectl delete pod ctl-user-77c4d96c4f-fqr47 --grace-period=0 --force
+
+##  批量重启，排除consul
+kubectl delete pod $(kubectl get pods -o wide --no-headers |grep -v consul |awk '{print $1}')
+
+## 选择某类服务来重启:ctl-exam
+kubectl delete pod $(kubectl get pods -o wide --no-headers |grep -v consul|grep ctl-exam | awk '{print $1}')

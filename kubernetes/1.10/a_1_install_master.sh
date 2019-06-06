@@ -116,6 +116,8 @@ mkdir -p $HOME/.kube
 
 kubectl get nodes
 
+# 删除节点  kubectl drain nodeName
+
 ## 根据初始化master，得到节点加入命令参数
 ## 如果忘记了token，使用命令重生并获取： kubeadm token create --print-join-command 
 # kubeadm join 10.9.40.60:6443 --token 8s7ofe.c8p7sj3jv2u43w76 --discovery-token-ca-cert-hash sha256:8d96611839648a79877f62e8316dd78b6cc274b77ea1435f731b33964a5bc21e

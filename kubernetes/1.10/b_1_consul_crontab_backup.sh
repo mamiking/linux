@@ -36,3 +36,7 @@ echo "==========> do backup"
 backup
 echo "==========> backup finish"
 
+
+#####  恢复备份数据
+## cat uat.consul.bak | consul kv import -token=2e302b35-63dd-27a7-73e6-2c40da2d734a -
+

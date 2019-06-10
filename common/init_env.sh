@@ -44,5 +44,10 @@ yum install git zip unzip wget curl vim telnet ntp -y
  systemctl enable ntpd
  systemctl start ntpd
  ntpdate -u cn.pool.ntp.org
+ 
+ 
+ ## 内部服务器，通常需要关闭防火墙，开启端口访问
+systemctl disable firewalld
+systemctl stop firewalld
 
 

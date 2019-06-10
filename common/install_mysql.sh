@@ -38,6 +38,18 @@ grant select on *.* to ctl@'%';
 flush privileges;
 
 
+## my.cnf 配置
+vim /etc/my.cnf
+
+sql_mode =''
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+max_connections=2000
+
+
+
 
 ## 如果远程不能连接数据库，需要关闭防火墙
 systemctl disable firewalld

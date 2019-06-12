@@ -172,6 +172,9 @@ kubectl describe secrets kube-admin-token-49w75 -n kube-system
 ### 使用上面得到的token 登录  https://10.9.40.60:30001
 
 
+## 部署项目，需要用到dockerize
+https://github.com/jwilder/dockerize
+
 
 
 

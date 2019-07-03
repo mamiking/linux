@@ -7,7 +7,12 @@ for($i=0;$i<74;$i++){
   $str.=get($i,$site);
 }
 $date=date("Ymd",time());
-file_put_contents("data/$site-list-$date.txt",$str);
+$f="data/$site-list-$date.txt";
+file_put_contents($f,$str);
+$arr=file($f);
+$re=array_unique($arr);
+$s=implode("",$re);
+file_put_contents($f,$s);
 
 function get($page,$site){
  $count=$page*10;
@@ -21,8 +26,14 @@ preg_match_all ("/data-tools=\'(.*)\'>/U", $cnt, $arr);
 foreach($arr[1] as $arrx){
  $js=json_decode($arrx);
   $curl= $js->url;
-  $arrx=cget($curl);
-  $strx.=$arrx[0]."\n";
+  $arrx=cget($curl);  
+  //抓取特殊路径
+  $app=strpos($arrx[0],"/app");
+  $doc=strpos($arrx[0],"/doc");
+  $poc=strpos($arrx[0],"/poc");
+  $hot=strpos($arrx[0],"/hot");
+  
+  if($app || $doc || $poc || $hot) $strx.=$arrx[0]."\n";
 };
 echo "page:$page \n";
 //echo $strx;

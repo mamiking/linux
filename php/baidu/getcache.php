@@ -1,5 +1,5 @@
 <?php
-
+$reArr=array();
 $site="www.aaa.cn";
 $site="www.bbb.com";
 $site="www.ccc.com";
@@ -8,9 +8,15 @@ for($i=0;$i<74;$i++){
   $str.=get($i,$site);
 }
 $date=date("Ymd",time());
-file_put_contents("data/$site-cache-$date.txt",$str);
+$f="data/$site-cache-$date.txt";
+file_put_contents($f,$str);
+$arr=file($f);
+$re=array_unique($arr);
+$s=implode("\n",$re);
+file_put_contents($f,$s);
 
 function get($page,$site){
+	global $reArr;
  $count=$page*10;
  $url="http://www.baidu.com/s?wd=site%3A$site&pn=$count&oq=site%3A$site&ct=2097152&tn=baiduhome_pg&ie=utf-8&si=$site&rsv_idx=2&rsv_pq=e3ed8e54000357f2&rsv_t=e103kG0JYC8HTyKbXVmMSDmBylGXkhHuO%2BqKy2Ah1xEZ8Yuq4PPJnZvNQrwubqR7S7%2FG";
 
@@ -28,9 +34,21 @@ foreach($arr[1] as $arrx){
   //echo $curl."\r\n";
   $arrx=cget($curl);
   //echo $arrx[0]."\r\n";
-  $strx.=$js->title."\n";
-  $strx.=$arrx[0]."\n";
-  $strx.="http://cache".$arry[1][$i]."\n\n";
+  //抓取特殊路径
+  $app=strpos($arrx[0],"/app");
+  $doc=strpos($arrx[0],"/doc");
+  $poc=strpos($arrx[0],"/poc");
+  $hot=strpos($arrx[0],"/hot");
+  
+  if($app || $doc || $poc || $hot){  
+	//$strx.=$js->title."\n";
+	//$strx.=$arrx[0]."\n";
+	$urlx=$arrx[0];
+	if(!in_array($urlx,$reArr)){
+		$reArr[]=$urlx;
+		$strx.="http://cache".$arry[1][$i]."\n";
+	}
+  }
   $i++;
 };
 echo "page:$page \n";

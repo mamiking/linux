@@ -30,7 +30,7 @@ foreach($arr[1] as $arrx){
   //echo $arrx[0]."\r\n";
   $strx.=$js->title."\n";
   $strx.=$arrx[0]."\n";
-  $strx.="http://cache.".$arry[1][$i]."\n\n";
+  $strx.="http://cache".$arry[1][$i]."\n\n";
   $i++;
 };
 echo "page:$page \n";

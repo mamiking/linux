@@ -1,4 +1,5 @@
 <?php
+//获取百度病毒收录的快照链接地址
 $reArr=array();
 $site="www.aaa.cn";
 $site="www.bbb.com";

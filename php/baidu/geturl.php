@@ -1,4 +1,5 @@
 <?php
+//获取百度病毒收录的url
 $site="www.aaa.cn";
 $site="www.bbb.com";
 $site="www.ccc.com";

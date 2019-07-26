@@ -63,15 +63,28 @@ CMD ["/data/startup.sh","serverName","context-path"]
 
 # 生成镜像
 
-docker build -t exam:1.0  .
+docker build -t exam:1.1  .
 
 # 运行 exam:1.0 容器
-docker run -d exam:1.0
+# docker run -d -p 80:80 --name myexam -it -v /opt/data:/data  exam:1.0 /bin/bash
+## 将宿主机80端口映射为容器80端口，将宿主机目录/opt/data 映射为容器 /data 目录
+docker run -d exam:1.1
+docker run -d -p 80:80  exam:1.1
 
 # 进入容器
 docker ps
-docker exec -it  towetyoe89 bash
+docker exec -it  a55e29eb8c66 bash
 netstat -tpnl
+
+# 退出容器
+exit
+
+# 关停容器
+docker stop a55e29eb8c66
+
+
+
+
 
 ############### startup.sh #####################
 #!/bin/bash
@@ -88,6 +101,11 @@ php-fpm
 nginx -g "daemon off;"
 
 ############### startup.sh  end #####################
+
+
+
+
+
 
 
 

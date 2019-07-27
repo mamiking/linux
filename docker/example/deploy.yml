@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  labels:
+    ctl-app: ctl-coach-exam
+  name: ctl-coach-exam
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      ctl-app: ctl-coach-exam
+  template:
+    metadata:
+      labels:
+        ctl-app: ctl-coach-exam
+    spec:
+      containers:
+      - name: test
+        image: {{ .Env.DockerImageName }}
+        env:
+        - name: SPRING_CLOUD_CONSUL_CONFIG_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_CONSUL_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: SPRING_CLOUD_CONSUL_TOKEN
+          value: "e9138d5b-c037-e88b-5cea-a381ae7be43e"
+        - name: log_level
+          value: INFO
+        - name: dbHost
+          value: "10.9.40.106:3306"
+        - name: dbName
+          value: "carshop"
+        - name: dbUser
+          value: "wxuser"
+        - name: dbPwd
+          value: "wx@user#2017"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /exam/coach/Mobile/CoachExam/health
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      imagePullSecrets:
+      - name: regcred

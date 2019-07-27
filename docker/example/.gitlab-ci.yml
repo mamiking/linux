@@ -1,0 +1,30 @@
+variables:
+  ServiceName: "ctl-coach-exam"
+  ServiceVersion: "3.0"
+  DockerImageName: "registry.dev.chelizitech.com/saas/${ServiceName}:${ServiceVersion}-${CI_PIPELINE_ID}"
+
+stages:
+- package
+- deploy
+
+before_script:
+- cd $CI_PROJECT_DIR
+
+build_image:
+  image: registry.dev.chelizitech.com/public/citools:1
+  stage: package
+  script:
+  - docker login -u saas -p Abcd1234 http://registry.dev.chelizitech.com
+  - docker build -t $DockerImageName .
+  - docker push $DockerImageName
+  tags:
+  - global
+
+deploy_test:
+  image: registry.dev.chelizitech.com/public/citools:1
+  stage: deploy
+  environment: test
+  script:
+  - dockerize -template deploy.yml | kubectl apply -f -
+  tags:
+  - global

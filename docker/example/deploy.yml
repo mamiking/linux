@@ -30,13 +30,13 @@ spec:
         - name: log_level
           value: INFO
         - name: dbHost
-          value: "10.9.40.106:3306"
+          value: "10.9.40.xxx:3306"
         - name: dbName
-          value: "carshop"
+          value: "carxxx"
         - name: dbUser
-          value: "wxuser"
+          value: "user"
         - name: dbPwd
-          value: "wx@user#2017"
+          value: "123456"
         ports:
         - containerPort: 80
           protocol: TCP

@@ -24,8 +24,10 @@ docker build -t lnmp:5.6  .
 ## 描述第一种方法生成 应用镜像  exam
 
 mkdir  exam
-# exam目录下：localtime,conf/ app/ consul.sh startup.sh  Dockerfile
+# exam目录下：conf/ app/ consul.sh startup.sh  Dockerfile
 
+# 需要特别注意的是，php-fpm默认关闭了系统环境变量，getenv()将失效，所以需要在php-fpm的配置文件www.conf中加入配置项：
+##   clear_env = no
 
 # 编辑Dockerfile
 
@@ -37,7 +39,9 @@ RUN mkdir /data
 
 WORKDIR /data
 
-COPY localtime /etc/
+RUN cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
+ENV LANG=en_US.UTF-8 \ 
+    LC_ALL=en_US.UTF-8
 
 COPY conf/nginx/nginx.conf  /etc/nginx/nginx.conf
 

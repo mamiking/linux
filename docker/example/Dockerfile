@@ -6,7 +6,9 @@ RUN mkdir /data
 
 WORKDIR /data
 
-COPY localtime /etc/
+RUN cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
+ENV LANG=en_US.UTF-8 \ 
+    LC_ALL=en_US.UTF-8
 
 COPY conf/nginx/nginx.conf  /etc/nginx/nginx.conf
 

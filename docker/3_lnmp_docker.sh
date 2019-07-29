@@ -9,7 +9,7 @@
 mkdir lnmp5.6
 cd lnmp5.6
 vim Dockerfile
-FROM centos:lateast
+FROM centos:latest
 
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm

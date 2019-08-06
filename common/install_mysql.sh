@@ -31,6 +31,9 @@ grep 'temporary password' /var/log/mysqld.log
 mysql -u root -p
 
 # 设置新密码,授权，新建用户
+## 密码要求复杂，可以考虑将密码策略设定为LOW
+set global validate_password_policy=LOW;
+
 set password=password("Cms@123456");
 grant all privileges on *.* to root@"%" identified by "Cms@123456";
 create user  ctl   IDENTIFIED by 'Dev@1234';
@@ -39,7 +42,19 @@ flush privileges;
 
 
 ## my.cnf 配置
+
+## 注意默认数据库地址为 /var/lib/mysql,如果修改 datadir，则要保持[mysqld] [client] 之下参数socket路径一致
+### 比如
 vim /etc/my.cnf
+
+[client]
+socket=/tmp/mysql.sock
+
+[mysqld]
+datadir=/data/mysql
+socket=/tmp/mysql.sock
+
+
 
 sql_mode =''
 character-set-client-handshake = FALSE

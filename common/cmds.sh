@@ -3,6 +3,26 @@
 ## bash for  centos 7
 ## create by whc  at 20190412
 
+## ====ssh 免密码登录 和执行
+ssh-copy-id  root@10.9.40.111
+## 初次访问 10.9.40.111或者执行10.9.40.111上的脚本，会要求 确认是否信任
+## 免除这种确认的方法
+ssh -o "StrictHostKeyChecking no" root@10.9.40.212 "/root/deploy/prod/deploy.py"
+
+# or
+ssh  -o StrictHostKeyChecking=no  root@192.168.0.110   /root/bin/gitUpdate
+
+### or 修改 /etc/ssh/ssh_config 加入
+Host *
+ StrictHostKeyChecking no
+## 然后执行
+ssh  root@192.168.0.110   /root/bin/gitUpdate
+
+### git hooks  post-receive 
+ssh -p 22 root@10.9.40.102 '/root/bin/gitupdate'
+ 
+
+
 ## =========查看centos版本
 cat /etc/redhat-release
 lsb_release -a

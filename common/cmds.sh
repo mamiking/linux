@@ -61,3 +61,7 @@ grep -ir "172.16.1.113" ./ |awk -F: '{print "cp "$1 $1".bak"}'|sh
 
 # 将目录下所有deploy.yml 文件改名为 deploy.yml.json
 find ./  -name  deploy.yml|awk -F: '{print "mv "$1 " "  $1".json"}'|sh
+
+
+## 获取本机出口IP地址
+curl 200019.ip138.com

@@ -1,0 +1,5 @@
+﻿key:BA1B-5CAE-566B-B2B9
+type:trialcopy
+deadline:2020-08-17
+userid:jcj
+username:深圳市稽查局

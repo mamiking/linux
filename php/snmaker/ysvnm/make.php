@@ -8,11 +8,11 @@ $info=array(
 	"type"=>"trialcopy",//trialcopy,legalcopy
 	"deadline"=>"2018-02-17",
 	"userid"=>"tctxcom",
-	"username"=>"深圳市通创通信有限公司",
-	"softname"=>"YSVNM版本库管理平台",
+	"username"=>"深圳市xxx有限公司",
+	"softname"=>"xyz管理平台",
 	"ver"=>"1.1.6",
-	"softdesc"=>"基于WEB的SVN综合管理工具",
-	"copy"=>"深圳市耀泰明德科技有限公司",
+	"softdesc"=>"基于WEB的xyz综合管理工具",
+	"copy"=>"深圳市及锋科技有限公司",
 );
 
 if(!isset($argv[1])){

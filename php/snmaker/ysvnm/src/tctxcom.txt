@@ -1,5 +1,0 @@
-﻿key:BA1B-5CAE-566B-B2B9
-type:trialcopy
-deadline:2018-02-17
-userid:tctxcom
-username:深圳市通创通信有限公司
